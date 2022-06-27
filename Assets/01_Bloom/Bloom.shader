@@ -1,4 +1,4 @@
-Shader "Custom/Bloom"
+Shader "Wyt/Unlit/Bloom"
 {
     Properties
     {
