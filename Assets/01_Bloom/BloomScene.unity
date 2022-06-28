@@ -335,14 +335,14 @@ MonoBehaviour:
   _godRayShader: {fileID: 4800000, guid: 356c4cd9a52842f58794817a46b22e27, type: 3}
   _colorThreshold: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _radialSampleCount: 6
-  _lightColor: {r: 1, g: 1, b: 1, a: 1}
-  lightPowerFactor: 0.5
-  SamplerScale: 1
+  _lightColor: {r: 0.7735849, g: 0.7067745, b: 0.26637593, a: 1}
+  lightPower: 0
+  SamplerScale: 4.52
   _blurIteration: 2
   _DownSample: 1
   _lightTransform: {fileID: 1290864709}
   _lightRadius: 2
-  _lightPowFactor: 3
+  _lightPowFactor: 3.09
 --- !u!1 &998416159
 GameObject:
   m_ObjectHideFlags: 0

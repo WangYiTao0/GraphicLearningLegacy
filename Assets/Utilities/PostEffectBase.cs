@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
  
-[ExecuteInEditMode]
+[ExecuteInEditMode, ImageEffectAllowedInSceneView]
 [RequireComponent (typeof(Camera))]
 public class PostEffectsBase : MonoBehaviour {
  
