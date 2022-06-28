@@ -1,27 +1,29 @@
-﻿Shader "Wyt/Stencil/StencilMask" 
-{
-	Properties{
- 
-		_ID("Mask ID", Int) = 1
+﻿Shader "Custom/StencilWindow"
+ {
+	Properties
+	{
+			_Color ("Color", Color) = (1,1,1,1)
+			_StencilRef("Stencil Ref",float) = 1
+			[Enum(UnityEngine.Rendering.CompareFunction)] _SComp("Stencil Comp", Int) = 8
+			[Enum(UnityEngine.Rendering.StencilOp)] _SOp("Stencil Op", Int) = 2
 	}
-	
 	SubShader
 	{
-		Tags
-		{ 
+		Tags 
+		{
 			"RenderType" = "Opaque"
-			"Queue" = "Geometry+1"  //default + 1
+			"Queue" = "Geometry+1"
 		}
-		ColorMask 0 //RGBA RGB R,G,B,A,0
-		ZWrite off	//  ZFail 防止	
+		ColorMask 0
+		ZWrite off
+		
 		Stencil
 		{
-			Ref[_ID]
-			Comp always //default always  いつも通過する
-			Pass replace // default keep　そして値をキープする　
-			//Fail keep
-			//ZFail Keep
+			Ref[_StencilRef]
+			Comp[SComp]
+			Pass[_SOp]
 		}
+		
 		Pass
 		{
 			CGINCLUDE
@@ -50,4 +52,5 @@
 			ENDCG
 		}
 	}
+	FallBack "Diffuse"
 }
