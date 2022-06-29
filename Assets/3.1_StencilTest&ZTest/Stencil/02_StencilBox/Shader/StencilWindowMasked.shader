@@ -1,4 +1,4 @@
-Shader "Custom/StencilWindowMasked"
+Shader "Wyt/Stencil/StencilWindowMasked"
 {    Properties
     {
         _Color ("Color", Color) = (1,1,1,1)

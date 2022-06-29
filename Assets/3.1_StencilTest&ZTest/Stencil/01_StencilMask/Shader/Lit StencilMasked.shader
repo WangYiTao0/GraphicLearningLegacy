@@ -1,4 +1,4 @@
-Shader "Wyt/Stencil/Lit StencilMasked"
+Shader "Wyt/Stencil/StencilMasked"
 {
     Properties
     {

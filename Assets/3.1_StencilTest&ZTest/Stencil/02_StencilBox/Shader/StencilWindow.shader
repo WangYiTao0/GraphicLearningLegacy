@@ -1,4 +1,4 @@
-﻿Shader "Custom/StencilWindow"
+﻿Shader "Wyt/Stencil/StencilWindow"
  {
 	Properties
 	{
