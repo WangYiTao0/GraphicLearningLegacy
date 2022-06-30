@@ -7,31 +7,31 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Green
+  m_Name: XRayMask
   m_Shader: {fileID: 4800000, guid: b1a87df0413a5cf46a1deeaf8659cff4, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 05cfe010378336646ad6c721f66543d1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _Glossiness: 0.5
     - _Metallic: 0
-    - _WriteMode: 1
+    - _WriteMode: 2
     - _ZTestOperation: 4
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.46553385, g: 1, b: 0.3254717, a: 1}
-    - _MainColor: {r: 0.5138793, g: 0.9339623, b: 0.3480331, a: 1}
+    - _Color: {r: 0.047169805, g: 0.045167312, b: 0.045167312, a: 0.4392157}
+    - _MainColor: {r: 0.16037738, g: 0.14600393, b: 0.14600393, a: 1}
   m_BuildTextureStacks: []

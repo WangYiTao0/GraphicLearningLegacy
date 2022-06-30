@@ -16,21 +16,21 @@ Shader "Wyt/Stencil/DepthFail"
             float4 vertex : POSITION;
         };
 
-        struct v2f
+        struct v2fXray
         {
             UNITY_FOG_COORDS(1)
             float4 vertex : SV_POSITION;
         };
 
-        v2f vert (appdata v)
+        v2fXray vert (appdata v)
         {
-            v2f o;
+            v2fXray o;
             o.vertex = UnityObjectToClipPos(v.vertex);
             UNITY_TRANSFER_FOG(o,o.vertex);
             return o;
         }
         
-        fixed4 frag (v2f i) : SV_Target
+        fixed4 frag (v2fXray i) : SV_Target
         {
             // apply fog
             UNITY_APPLY_FOG(i.fogCoord, col);

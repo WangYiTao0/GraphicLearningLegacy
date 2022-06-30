@@ -14,7 +14,7 @@ Shader "Wyt/ShadowVolume/Drawing"
 		float2 uv : TEXCOORD0;
 	};
 
-	struct v2f
+	struct v2fXray
 	{
 		float2 uv : TEXCOORD0;
 		float4 vertex : SV_POSITION;
@@ -27,23 +27,23 @@ Shader "Wyt/ShadowVolume/Drawing"
     sampler2D _ShadowVolumeColorRT;
     float3 _ShadowVolumeDistance;/*x:ShadowDistance, y:FadeLength, z:x-y*/
 
-	v2f vert_sv_stencil (appdata v)
+	v2fXray vert_sv_stencil (appdata v)
 	{
-		v2f o;
-		UNITY_INITIALIZE_OUTPUT(v2f, o);
+		v2fXray o;
+		UNITY_INITIALIZE_OUTPUT(v2fXray, o);
 		o.vertex = UnityObjectToClipPos(v.vertex);
 		return o;
 	}
 	
-	fixed4 frag_sv_stencil (v2f i) : SV_Target
+	fixed4 frag_sv_stencil (v2fXray i) : SV_Target
 	{
 		return fixed4(0,0,0,0);
 	}
 
-	v2f vert_sv_stencil_fade (appdata v)
+	v2fXray vert_sv_stencil_fade (appdata v)
 	{
-		v2f o;
-		UNITY_INITIALIZE_OUTPUT(v2f, o);
+		v2fXray o;
+		UNITY_INITIALIZE_OUTPUT(v2fXray, o);
 		o.vertex = UnityObjectToClipPos(v.vertex);
 		
 		float3 wPos = mul(unity_ObjectToWorld, v.vertex).xyz;
@@ -65,15 +65,15 @@ Shader "Wyt/ShadowVolume/Drawing"
 		return o;
 	}
 
-	fixed4 frag_sv_stencil_fade (v2f i) : SV_Target
+	fixed4 frag_sv_stencil_fade (v2fXray i) : SV_Target
 	{
 		return fixed4(0,0,0,i.fade);
 	}
 
-	v2f vert_shadow(appdata v)
+	v2fXray vert_shadow(appdata v)
 	{
-		v2f o;
-		UNITY_INITIALIZE_OUTPUT(v2f, o);
+		v2fXray o;
+		UNITY_INITIALIZE_OUTPUT(v2fXray, o);
 		o.vertex = v.vertex;
 
 		if (_ProjectionParams.x < 0)
@@ -84,15 +84,15 @@ Shader "Wyt/ShadowVolume/Drawing"
 		return o;
 	}
 
-	fixed4 frag_shadow(v2f i) : SV_Target
+	fixed4 frag_shadow(v2fXray i) : SV_Target
 	{
 		return _ShadowColor;
 	}
 
-	v2f vert_shadow_fade(appdata v)
+	v2fXray vert_shadow_fade(appdata v)
 	{
-		v2f o;
-		UNITY_INITIALIZE_OUTPUT(v2f, o);
+		v2fXray o;
+		UNITY_INITIALIZE_OUTPUT(v2fXray, o);
 		o.vertex = v.vertex;
 		o.uv = v.uv;
 
@@ -104,7 +104,7 @@ Shader "Wyt/ShadowVolume/Drawing"
 		return o;
 	}
 
-	fixed4 frag_shadow_fade(v2f i) : SV_Target
+	fixed4 frag_shadow_fade(v2fXray i) : SV_Target
 	{
 		fixed4 fade = tex2D(_ShadowVolumeFadeRT, i.uv).a;
 		fixed4 shadow = _ShadowColor;
@@ -112,16 +112,16 @@ Shader "Wyt/ShadowVolume/Drawing"
 		return shadow;
 	}
 
-	v2f vert_overlay_shadow (appdata v)
+	v2fXray vert_overlay_shadow (appdata v)
 	{
-		v2f o;
-		UNITY_INITIALIZE_OUTPUT(v2f, o);
+		v2fXray o;
+		UNITY_INITIALIZE_OUTPUT(v2fXray, o);
 		o.vertex = UnityObjectToClipPos(v.vertex);
 		o.uv = v.uv;
 		return o;
 	}
 
-	fixed4 frag_overlay_shadow(v2f i) : SV_Target
+	fixed4 frag_overlay_shadow(v2fXray i) : SV_Target
 	{
 		fixed4 shadow = tex2D(_ShadowVolumeRT, i.uv);
 		fixed4 color = tex2D(_ShadowVolumeColorRT, i.uv);

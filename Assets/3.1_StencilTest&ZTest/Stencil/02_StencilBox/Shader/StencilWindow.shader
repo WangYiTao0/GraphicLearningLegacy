@@ -32,19 +32,19 @@
 			{
 				float4 vertex : POSITION;
 			};
-			struct v2f
+			struct v2fXray
 			{
 				float4 pos : SV_POSITION;
 			};
  
  
-			v2f vert(appdata v)
+			v2fXray vert(appdata v)
 			{
-				v2f o;
+				v2fXray o;
 				o.pos = UnityObjectToClipPos(v.vertex);
 				return o;
 			}
-			half4 frag(v2f i) : SV_Target
+			half4 frag(v2fXray i) : SV_Target
 			{
 	 
 				return half4(1,1,1,1);
