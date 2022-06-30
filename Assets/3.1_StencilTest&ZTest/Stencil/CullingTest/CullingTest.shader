@@ -3,11 +3,11 @@ Shader "Wyt/CullingTest"
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		[Enum(UnityEngine.Rendering.CullMode)] _mode("CullMode",Int) = 1
+		[Enum(UnityEngine.Rendering.CullMode)] _Mode("CullMode",Int) = 1
 	}
 	SubShader
 	{
-		Cull[_mode]
+		Cull[_Mode]
 		Pass
 		{
 			CGPROGRAM
