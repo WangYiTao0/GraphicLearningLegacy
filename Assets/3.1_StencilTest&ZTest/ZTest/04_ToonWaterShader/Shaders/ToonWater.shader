@@ -2,6 +2,11 @@
 {
     Properties
     {	
+        //水の色は深度によって変化する
+        // Gradient で　色をコントロールする
+        _DepthGradientShallow("Depth Gradient Shallow", Color) = (0.325, 0.807, 0.971, 0.725)
+        _DepthGradientDeep("Depth Gradient Deep", Color) = (0.086, 0.407, 1, 0.749)
+        _DepthMaxDistance("Depth Maximum Distance", Float) = 1
     }
     SubShader
     {
