@@ -13,9 +13,9 @@
             CGPROGRAM
             //hull domain
             #pragma hull hullProgram
-            #pragma domain ds
+            #pragma domain domain
            
-            #pragma vertex tessvert
+            #pragma vertex tessVert
             #pragma fragment frag
 
             #include "UnityCG.cginc"
@@ -51,7 +51,7 @@
                 return o;
             }
 
-     
+            //Tessを使うことができない可能性があります。
             #ifdef UNITY_CAN_COMPILE_TESSELLATION
    
                 struct TessVertex{
@@ -70,8 +70,8 @@
                 };
 
                 //
-                TessVertex tessvert (VertexInput v){
-                    //空間変換は不要. hullshader に　入力する
+                TessVertex tessVert (VertexInput v){
+                    //空間変換は不要. hull　shaderに直接入力する
                     TessVertex o;
                     o.vertex  = v.vertex;
                     o.normal  = v.normal;
@@ -81,7 +81,7 @@
                 }
 
                 float _TessellationUniform;
-                OutputPatchConstant hsconst (InputPatch<TessVertex,3> patch){
+                OutputPatchConstant hsConst (InputPatch<TessVertex,3> patch){
                     OutputPatchConstant o;
                     o.edge[0] = _TessellationUniform;
                     o.edge[1] = _TessellationUniform;
@@ -93,7 +93,7 @@
                 [UNITY_domain("tri")]//primitiveを定義する，quad,triangle
                 [UNITY_partitioning("fractional_odd")]//分割のルール　equal_spacing,fractional_odd,fractional_even
                 [UNITY_outputtopology("triangle_cw")]// 頂点の順番　時計回り・逆時計回り　Clockwise/Counterclockwise　/triangle_cw/triangle_ccw
-                [UNITY_patchconstantfunc("hsconst")]//上の関数　
+                [UNITY_patchconstantfunc("hsConst")]//上の関数　を指定する
                 [UNITY_outputcontrolpoints(3)]      
               
                 TessVertex hullProgram (InputPatch<TessVertex,3> patch,uint id : SV_OutputControlPointID){
@@ -101,11 +101,11 @@
                 }
 
                 [UNITY_domain("tri")]//primitiveを定義する，quad,triangle
-                VertexOutput ds (OutputPatchConstant tessFactors, const OutputPatch<TessVertex,3>patch,float3 bary :SV_DOMAINLOCATION)
+                VertexOutput domain (OutputPatchConstant tessFactors, const OutputPatch<TessVertex,3>patch,float3 bary :SV_DOMAINLOCATION)
                 //bary:中心座標
                 {
                     VertexInput v;
-                    v.vertex = patch[0].vertex*bary.x + patch[1].vertex*bary.y + patch[2].vertex*bary.z;
+                    v.vertex = patch[0].vertex * bary.x + patch[1].vertex*bary.y + patch[2].vertex*bary.z;
 			        v.tangent = patch[0].tangent*bary.x + patch[1].tangent*bary.y + patch[2].tangent*bary.z;
 			        v.normal = patch[0].normal*bary.x + patch[1].normal*bary.y + patch[2].normal*bary.z;
 			        v.uv = patch[0].uv*bary.x + patch[1].uv*bary.y + patch[2].uv*bary.z;
